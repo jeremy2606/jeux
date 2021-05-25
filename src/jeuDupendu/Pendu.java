@@ -9,9 +9,8 @@ import java.util.StringJoiner;
 
 public class Pendu {
        
-	public static void main(String[] args) {
 		
-	}
+	
 		 
 		 
 		 public static ArrayList<String>nouvelleListe()
