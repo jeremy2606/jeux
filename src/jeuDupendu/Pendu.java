@@ -1,22 +1,26 @@
 package jeuDupendu;
 
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.StringJoiner;
 
 public class Pendu {
        
 	public static void main(String[] args) {
-		  Scanner sc = new Scanner(System.in);
-		  String valeurSaisie = null;
-		  System.out.println("Essayez de deviner le mot auquel je pense .");
-		  System.out.println("Rentrez une lettre par une lettre .");
-		  System.out.println("Attention, tapez les lettres en majuscule .");
-		  System.out.println("Bonne chance ! ");
-		  int nbreErreursMax = 10;
+		
+	}
+		 
+		 
+		 public static ArrayList<String>nouvelleListe()
+		 {
+			 
+		 
 		  ArrayList<String> tabDeMots = new ArrayList<String>();
+		  
+		  
 		  tabDeMots.add("Tabulation") ;
 		  tabDeMots.add("Equilibre") ;
 		  tabDeMots.add("Attirance") ;
@@ -27,15 +31,64 @@ public class Pendu {
 		  tabDeMots.add("Patriarche") ;
 		  tabDeMots.add("Hardrock") ;
 		  tabDeMots.add("Miraculeuse") ;
-		  List<ArrayList<String>> list = Arrays.asList(tabDeMots);
+		  return tabDeMots;
+ }
+	
+	
+	     public static char LettreSaisie(int i)
+	     {
+	    	 
+	    	 System.out.println("Essayez de deviner le mot auquel je pense . Rentrez une lettre. Il te reste" + (10-i) + "chances restantes");
+			Scanner sc = new Scanner(System.in);//Creer un Scanner
+			String reponse = sc.nextLine();// on applique a "reponse" la fonction nextLine pour prendre et lire les reponse une a une
+			char caractere = reponse.charAt(0);    // reponse est un string on doit la convertir avec charAt en passant par la creation de la variable "caractere" qui est de type char
+		    
+		    return caractere;//renvoie la lettre saisie     
+	     }
 		  
+		  public static boolean presenceDuCaractere(String entree, char caractereSaisi) 
+		  {
 		  
-		  Random random = new Random();
-		  int indexAleatoire = random.nextInt(9);
-		  
-		  String motATrouver = tabDeMots.get(indexAleatoire);
-		  int longMotATrouver = motATrouver.length();
-		  for (int i=1; i<=longMotATrouver; i++) {
+		     boolean presenceDuResultat = false;//creation du boolean qui va verifier la saisie
+		     for(int i = 0; i< entree.length(); i++) //il boucle autant de fois qu il ya de lettres dans le mot 
+		     {
+		    	 if(entree.charAt(i) == caractereSaisi) //si un un caractere saisi est egal a un caracter du mot entré par l utilisateur
+		    	 {
+		    		 presenceDuResultat = true;//le boolean sera vrai
+		    		 break; //pause avant de reboucler
+		    	 }
+		     }
+		     return presenceDuResultat; //renvoyer 	la valeur obtenue
+		}
+		 
+		     public static String AfficherLeMotATrouver(String motChoisi, ArrayList<Character>lettreChoisies)
+		    {
+			  int i =0;//declaration de variable a zero au debut
+			  char[] tabDuMot = new char[motChoisi.length()];//creation tableau qui affichera soit des tirets soit la lettre adequate. Il est de longeur du mot choisi
+			  while (i<motChoisi.length()) {//on fait cette boucle autant de fois qu il ya de lettre dans le mot 
+				  if(lettreChoisies.contains(motChoisi.charAt(i))){//on applque "contains"qui appartient a la classe String pour voir si ya la lettre choisie par l'utilsateur est dans dans le mot choisi par l ordi. Il est converti en caractere avec charAt à chaque tour(i)			  }
+		             System.out.println(motChoisi.charAt(i)+" ");//affiche le mot chosi, lettre à lettre avec charAt avec des espaces
+				     tabDuMot[i] = motChoisi.charAt(i); //pour chaque case du tableau qui affiche le mot a trouver par caractere,mettre le motChoisi qui est converti en caractere avec charAt
+				  }
+				  else 
+				  {
+					  System.out.println("_ ");//affiche un tiret un espace a l'ecran
+					  tabDuMot[i] = "_"; // le tableau d affichage  du mot . pâr defaut  . il y aura des tirets
+				  }
+			  i++; //pour chaque lettres du mot ou plutot case du tableau
 			  }
+			  String caractereTrouve = new String (tabDuMot);
+			  return caractereTrouve;
 		  }
+		  //decla:
+			ArrayList tabDeMots = nouvelleListe();
+			
+			int listLength = tabDeMots.size(); //on declare listLength etant egale a la longueur du tableau tabDemots
+		  int nbreErreursMax = 10;
+		 
+		  
+		  		  Random random = new Random();
+		  int indexAleatoire = random.nextInt(9);
+
+		  
 }
